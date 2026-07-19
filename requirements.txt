@@ -3,9 +3,16 @@ pandas
 numpy
 plotly
 easyocr
-opencv-python
+opencv-python-headless
 Pillow
 PyMuPDF
 google-genai
 python-dotenv
 reportlab
+torch
+torchvision
+scikit-image
+scipy
+python-bidi
+PyYAML
+ninja
