@@ -325,22 +325,27 @@ if analyze:
                 "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             }
 
-            filename = datetime.now().strftime("%Y%m%d_%H%M%S") + ".json"
+           # ==========================================================
+# Save Report History
+# ==========================================================
 
-            with open(
-                f"data/history/{filename}",
-                "w",
-                encoding="utf-8"
-            ) as file:
+# Create the history folder if it doesn't exist
+os.makedirs("data/history", exist_ok=True)
 
-                json.dump(
-                    history,
-                    file,
-                    indent=4
-                )
-            # ==========================================================
-            # Display Results
-            # ==========================================================
+filename = datetime.now().strftime("%Y%m%d_%H%M%S") + ".json"
+
+with open(
+    os.path.join("data", "history", filename),
+    "w",
+    encoding="utf-8"
+) as file:
+
+    json.dump(
+        history,
+        file,
+        indent=4
+    )
+
 # ==========================================================
 # Display Results
 # ==========================================================
