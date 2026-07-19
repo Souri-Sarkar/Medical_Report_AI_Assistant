@@ -327,104 +327,105 @@ if analyze:
             }
 
            # ==========================================================
-# Save Report History
-# ==========================================================
+            # Save Report History
+            # ==========================================================
 
-# Create the history folder if it doesn't exist
-os.makedirs("data/history", exist_ok=True)
+            # Create the history folder if it doesn't exist
+            os.makedirs("data/history", exist_ok=True)
 
-filename = datetime.now().strftime("%Y%m%d_%H%M%S") + ".json"
+            filename = datetime.now().strftime("%Y%m%d_%H%M%S") + ".json"
 
-with open(
-    os.path.join("data", "history", filename),
-    "w",
-    encoding="utf-8"
-) as file:
+            with open(
+                os.path.join("data", "history", filename),
+                "w",
+                encoding="utf-8"
+            ) as file:
 
-    json.dump(
-        history,
-        file,
-        indent=4
-    )
+                json.dump(
+                    history,
+                    file,
+                    indent=4
+                )
 
-# ==========================================================
-# Display Results
-# ==========================================================
+            # ==========================================================
+            # Display Results
+            # ==========================================================
 
-if st.session_state["analysis"]:
+            if st.session_state["analysis"]:
 
-    text = st.session_state["report_text"]
-    medical_values = st.session_state["medical_values"]
-    analysis = st.session_state["analysis"]
-    summary = st.session_state["summary"]
+                text = st.session_state["report_text"]
+                medical_values = st.session_state["medical_values"]
+                analysis = st.session_state["analysis"]
+                summary = st.session_state["summary"]
 
-    # ======================================================
-    # Dashboard Statistics
-    # ======================================================
+                # ======================================================
+                # Dashboard Statistics
+                # ======================================================
 
-    total_parameters = len(analysis)
+                total_parameters = len(analysis)
 
-    abnormal_parameters = sum(
-        1
-        for details in analysis.values()
-        if details["status"] != "Normal"
-    )
+                abnormal_parameters = sum(
+                    1
+                    for details in analysis.values()
+                    if details["status"] != "Normal"
+                )
 
-    normal_parameters = total_parameters - abnormal_parameters
+                normal_parameters = total_parameters - abnormal_parameters
 
-    health_score = max(
-        0,
-        100 - abnormal_parameters * 8
-    )
+                health_score = max(
+                    0,
+                    100 - abnormal_parameters * 8
+                )
 
-    # ======================================================
-    # Save Files
-    # ======================================================
+                # ======================================================
+                # Save Files
+                # ======================================================
 
-    os.makedirs(
-        "data/output_reports",
-        exist_ok=True
-    )
+                os.makedirs(
+                    "data/output_reports",
+                    exist_ok=True
+                )
 
-    with open(
-        "data/output_reports/extracted_parameters.json",
-        "w",
-        encoding="utf-8"
-    ) as file:
+                with open(
+                    "data/output_reports/extracted_parameters.json",
+                    "w",
+                    encoding="utf-8"
+                ) as file:
 
-        json.dump(
-            medical_values,
-            file,
-            indent=4
-        )
+                    json.dump(
+                        medical_values,
+                        file,
+                        indent=4
+                    )
 
-    os.makedirs(
-        "data/extracted_text",
-        exist_ok=True
-    )
+                os.makedirs(
+                    "data/extracted_text",
+                    exist_ok=True
+                )
 
-    with open(
-        "data/extracted_text/report.txt",
-        "w",
-        encoding="utf-8"
-    ) as file:
+                with open(
+                    "data/extracted_text/report.txt",
+                    "w",
+                    encoding="utf-8"
+                ) as file:
 
-        file.write(text)
+                    file.write(text)
 
-    # ======================================================
-    # Tabs
-    # ======================================================
-        tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs(
-            [
-                "📄 Overview",
-                "🧪 Parameters",
-                "📊 Dashboard",
-                "🤖 AI Summary",
-                "💬 AI Chat",
-                "📥 Download",
-                "📈 Compare Reports"
-            ]
-        )
+                # ======================================================
+                # Tabs
+                # ======================================================
+
+                tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs(
+                    [
+                        "📄 Overview",
+                        "🧪 Parameters",
+                        "📊 Dashboard",
+                        "🤖 AI Summary",
+                        "💬 AI Chat",
+                        "📥 Download",
+                        "📈 Compare Reports"
+                    ]
+                )
 
     # ==========================================================
     # TAB 1 - Overview
