@@ -156,7 +156,39 @@ PDF Report Generation
 
 # 📸 Screenshots
 
-(Add screenshots here after deployment.)
+## 🏠 Home Page
+
+![Home Page](screenshots/medical_report.png)
+
+---
+
+## 📄 Medical Report Overview
+
+![Overview](screenshots/report_overview.png)
+
+---
+
+## 🧪 Extracted Medical Parameters
+
+![Medical Parameters](screenshots/medical_parameters.png)
+
+---
+
+## 📊 Health Dashboard
+
+![Health Dashboard](screenshots/health_dashboard.png)
+
+---
+
+## 🤖 AI Medical Summary
+
+![AI Summary](screenshots/AI_medical_summary.png)
+
+---
+
+## 💬 AI Medical Chat
+
+![AI Chat](screenshots/AI_medical_chat.png)
 
 ---
 
