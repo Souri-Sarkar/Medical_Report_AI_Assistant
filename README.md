@@ -158,7 +158,7 @@ PDF Report Generation
 
 ## 🏠 Home Page
 
-![Home Page](screenshots/medical_report.png)
+![Home Page](screenshots/home_page.png)
 
 ---
 
