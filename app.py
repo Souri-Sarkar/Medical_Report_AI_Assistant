@@ -1,5 +1,4 @@
 import os
-import glob
 import json
 import pandas as pd
 import streamlit as st
@@ -17,7 +16,6 @@ from utils.analyzer import MedicalAnalyzer
 from utils.ai_summary import generate_summary
 from utils.chatbot import ask_medical_ai
 from utils.pdf_generator import generate_pdf
-from utils.compare_reports import compare_reports
 
 st.set_page_config(
     page_title="Medical Report AI Assistant",
@@ -983,68 +981,4 @@ Generate a professional PDF report containing:
                     st.error(
                         "Something went wrong while processing the report. Please try again."
                     )                 
-    # ==========================================================
-    # TAB 7 - Compare Reports
-    # ==========================================================
-
-    with tab7:
-
-        st.subheader("📈 Compare Medical Reports")
-
-        history_files = sorted(
-            glob.glob("data/history/*.json")
-        )
-
-        if len(history_files) < 2:
-
-            st.info(
-                "Analyze at least two reports to compare them."
-            )
-
-        else:
-
-            old_report = history_files[-2]
-            new_report = history_files[-1]
-
-            with open(old_report, "r", encoding="utf-8") as file:
-
-                old_data = json.load(file)
-
-            with open(new_report, "r", encoding="utf-8") as file:
-
-                new_data = json.load(file)
-
-            comparison_df = compare_reports(
-                old_data["analysis"],
-                new_data["analysis"]
-            )
-
-            st.success("Comparison generated successfully!")
-
-            st.dataframe(
-                comparison_df,
-                use_container_width=True,
-                hide_index=True
-            )
-            st.divider()
-
-            # ==========================================================
-            # Footer
-            # ==========================================================
-
-            st.divider()
-
-            st.markdown(
-                """
-            <div style="text-align:center; color:gray; font-size:14px;">
-
-            🏥 <b>Medical Report AI Assistant</b><br><br>
-
-            Built using <b>Python, Streamlit, OCR, Plotly & Gemini AI</b><br><br>
-
-            © 2026 Souri Sarkar
-
-            </div>
-            """,
-                unsafe_allow_html=True
-            )
+   
