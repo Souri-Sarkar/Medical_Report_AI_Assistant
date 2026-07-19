@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 from google.genai import Client
+import streamlit as st
 import os
 import time
 
@@ -10,11 +11,22 @@ import time
 load_dotenv()
 
 # --------------------------------------------------
+# Get Gemini API Key
+# Works for Local (.env) and Streamlit Cloud (Secrets)
+# --------------------------------------------------
+
+api_key = os.getenv("GEMINI_API_KEY")
+
+if not api_key:
+
+    api_key = st.secrets.get("GEMINI_API_KEY")
+
+# --------------------------------------------------
 # Initialize Gemini Client
 # --------------------------------------------------
 
 client = Client(
-    api_key=os.getenv("GEMINI_API_KEY")
+    api_key=api_key
 )
 
 # --------------------------------------------------
@@ -95,6 +107,7 @@ It is not a substitute for professional medical advice.
             )
 
             if response.text:
+
                 return response.text.strip()
 
             return "Sorry, I couldn't generate an answer."
@@ -102,11 +115,22 @@ It is not a substitute for professional medical advice.
         except Exception as e:
 
             if attempt < 2:
+
                 time.sleep(5)
 
             else:
-                return f"❌ Gemini Error:\n\n{str(e)}"
 
+                return f"""
+## ❌ AI Response Unavailable
+
+The AI service is temporarily unavailable.
+
+Reason:
+
+{str(e)}
+
+Please try again after a few minutes.
+"""
 
 # --------------------------------------------------
 # Debug - List Available Gemini Models
@@ -118,18 +142,20 @@ if __name__ == "__main__":
     print("Gemini Model Checker")
     print("=" * 60)
 
-    api_key = os.getenv("GEMINI_API_KEY")
-
     if api_key:
+
         print("✅ API Key Loaded Successfully")
+
     else:
-        print("❌ GEMINI_API_KEY not found in .env")
+
+        print("❌ GEMINI_API_KEY not found.")
 
     print("\nListing available Gemini models...\n")
 
     try:
 
         for model in client.models.list():
+
             print(model.name)
 
     except Exception as e:
