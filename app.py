@@ -6,6 +6,7 @@ import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
 
+from datetime import datetime
 from utils.pdf_reader import extract_text_from_pdf
 from utils.image_reader import load_image
 from utils.ocr import extract_text_from_image
