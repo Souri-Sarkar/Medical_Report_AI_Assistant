@@ -413,7 +413,7 @@ if analyze:
                 # Tabs
                 # ======================================================
 
-                tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs(
+                tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(
                     [
                         "📄 Overview",
                         "🧪 Parameters",
@@ -421,7 +421,6 @@ if analyze:
                         "🤖 AI Summary",
                         "💬 AI Chat",
                         "📥 Download",
-                        "📈 Compare Reports"
                     ]
                 )
 
